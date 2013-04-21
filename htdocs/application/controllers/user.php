@@ -88,7 +88,7 @@ class User_Controller extends Base_Controller {
 
 	}
 /**
- @desc Action user.signup : voir Views/signup.blade.php
+ @desc Action user.signup : voir Views/user/signup.blade.php
 */
 	public function action_signup(){
 
