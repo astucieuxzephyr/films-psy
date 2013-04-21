@@ -14,7 +14,8 @@
 {{ Form::text('titre',Input::old('titre'),array('input'=>'input-xlarge','placeholder'=>'Titre du film')) }}
 {{ $errors->first('titre','<span class="error">::message</span>'); }}
 <br/>
-
+{{ Form::text('synopsis',Input::old('synopsis'),array('input'=>'input-xlarge','placeholder'=>'Synopsis du film')) }}
+{{ $errors->first('synopsis','<span class="error">::message</span>'); }}
 
 
 {{-- bouton --}}
