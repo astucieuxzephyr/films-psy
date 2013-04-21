@@ -61,13 +61,6 @@ cela sera possible seulement pour un utilisateur authentifié
 sinon on est redirigé. Où ? aller voir le fichier routes
 */
 /*
-
-			$table->string('titre_FR',250); // 255 par defaut
-			$table->string('titre_ENG',250); // 255 par defaut
-			$table->string('realisateur'); // 255 par defaut
-			$table->string('acteurs');
-			$table->string('type'); // type du film : documentaire, fiction, comédie
-			$table->string('duree');
 			$table->string('annee_production');
 			$table->text('synopsis'); // petit synopsis
 			$table->string('theme'); // theme : amour, guerre
@@ -114,7 +107,7 @@ sinon on est redirigé. Où ? aller voir le fichier routes
 						'acteurs'=>Input::get('acteurs'),
 						'type'=>Input::get('type'),
 						'duree'=>Input::get('duree'),
-						'annee'=>Input::get('annee'),
+						'annee'=>Input::get('annee_production'),
 						'synopsis'=>Input::get('synopsis'),
 						);
 					if(Film::create($data))

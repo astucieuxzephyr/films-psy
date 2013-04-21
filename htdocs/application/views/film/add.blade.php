@@ -26,8 +26,8 @@
 {{ Form::text('duree',Input::old('duree'),array('input'=>'input-xlarge','placeholder'=>'Durée')) }}
 {{ $errors->first('duree','<span class="error">::message</span>'); }}
 <br/>
-{{ Form::text('annee',Input::old('annee'),array('input'=>'input-xlarge','placeholder'=>'Année')) }}
-{{ $errors->first('annee','<span class="error">::message</span>'); }}
+{{ Form::text('annee_production',Input::old('annee_production'),array('input'=>'input-xlarge','placeholder'=>'Année de production')) }}
+{{ $errors->first('annee_production','<span class="error">::message</span>'); }}
 <br/>
 {{ Form::text('synopsis',Input::old('synopsis'),array('input'=>'input-xlarge','placeholder'=>'Synopsis du film')) }}
 {{ $errors->first('synopsis','<span class="error">::message</span>'); }}
