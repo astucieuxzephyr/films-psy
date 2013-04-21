@@ -54,12 +54,91 @@ Action film.lire
 		->with('film',$film); // un seul film transmis
 	}
 
-/* Action film.add : pour ajouter un film
+/**
+@desc Action film.add : pour ajouter un film
+voir Views/film/add.blade.php
 cela sera possible seulement pour un utilisateur authentifié
-sinon on est redirigé. Où ? aller voir le fichier routes */
+sinon on est redirigé. Où ? aller voir le fichier routes
+*/
+/*
+
+			$table->string('titre_FR',250); // 255 par defaut
+			$table->string('titre_ENG',250); // 255 par defaut
+			$table->string('realisateur'); // 255 par defaut
+			$table->string('acteurs');
+			$table->string('type'); // type du film : documentaire, fiction, comédie
+			$table->string('duree');
+			$table->string('annee_production');
+			$table->text('synopsis'); // petit synopsis
+			$table->string('theme'); // theme : amour, guerre
+			$table->string('tags_psy');
+			$table->string('lien_defaut');
+			$table->string('lien_allocine');
+*/
 	public function action_add(){
-		return View::make('film.add');
+
+		// On vérifie si la personne est authentifiée
+		// si c'est le cas c'est qu'elle est déjà connectée, donc on la renvoie vers son espace membre user
+		if(Auth::check()){  
+
+			// On vérifie qu'il y a bien une requete :
+			// si le formulaire a bien été posté : on définit ci dessous les règles de validation
+			if(Request::method()=='POST')
+			{
+				// Définition des règles de validation
+				$rules = array(
+					'titre' => 'required|min:2',
+					// 'titre_FR' => 'required',
+					'realisateur' => 'required|min:4',
+					// 'synopsis' => 'required'
+					);
+
+				// $validation = Validator::make($attributes, $rules, $messages);
+				// on valide tous les champs postés DONT les fichiers : d'où le Input::all()
+				$validation = Validator::make(Input::all(),$rules);
+
+				// si la validation rate on renvoie sur le meme formulaire avec les erreurs en plus ! ;)
+				if($validation->fails()){
+					return Redirect::to('film/add')->with_errors($validation)->with_input();
+				}
+				else
+				{
+				// Si SUCCES de la validation
+					// on met les donnees dans la base
+					$data = array(
+						// 'nom_champ'=>Input::get('nom_champ'),
+						'titre'=>Input::get('titre'),
+						'titre_FR'=>Input::get('titre_FR'),
+						'titre_ENG'=>Input::get('titre_ENG'),
+						'realisateur'=>Input::get('realisateur'),
+						'acteurs'=>Input::get('acteurs'),
+						'type'=>Input::get('type'),
+						'duree'=>Input::get('duree'),
+						'annee'=>Input::get('annee'),
+						'synopsis'=>Input::get('synopsis'),
+						);
+					if(Film::create($data))
+					{
+						Session::flash('success','Ajout du film correctement effectué');
+					}
+				}
+				return Redirect::to('film/add'); // On relance le meme formulaire pour pouvoir entrer un autre film
+			}
+
+			// on met un titre
+			Section::inject('titre', 'Ajout d\'un film'); 
+			// On va à la vue contenant le formulaire d'ajout
+			return View::make('film.add');  // on renvoie à la vue d'inscription views/user/signup.blade.php
+		
+		} 
+		else 
+		{
+		// return View::make('ERREUR vous devez etre connecte pour ajouter un film');
+		// l'URL Base de l'application redirige vers le controleur Film
+		return Redirect::to('film');
+		}
 	}
+
 
 /**
 Action film.user

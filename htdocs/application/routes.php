@@ -56,12 +56,21 @@ Route::get('/', function()
 // Il suffit de modifier ici pour modifier la page racine du site
 Route::get('/login', function()
 {
-	// Ajout Tanguy
 	// l'URL Login redirige vers le controleur user fonction login
 	return Redirect::to('user/login');
 });
 
+// Ajout d'un film dans la base
+Route::post('film', function()
+{
+    return View::make("Film ajouté à la base.");
+});
 
+// Modification d'un film
+Route::put('films/add', function($id='0')
+{
+	return View::make("Film ($id) modifié.");
+});
 
 /*
 |--------------------------------------------------------------------------
