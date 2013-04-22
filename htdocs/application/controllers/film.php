@@ -108,7 +108,7 @@ sinon on est redirigé. Où ? aller voir le fichier routes
 						'type'=>Input::get('type'),
 						'duree'=>Input::get('duree'),
 						'annee'=>Input::get('annee_production'),
-						'synopsis'=>Input::get('synopsis'),
+						'synopsis'=>Input::get('synopsis','Synopsis à compléter'),
 						);
 					if(Film::create($data))
 					{
