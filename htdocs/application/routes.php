@@ -5,7 +5,9 @@
 /* 
 Il est possible d'utiliser les routes sans controleur,
 mais ici on veut utiliser un contrôleur donc :
-On détecte le controller */
+On détecte le controller 
+Register all controlers and all routes
+*/
 Route::controller(Controller::detect());
 
 
