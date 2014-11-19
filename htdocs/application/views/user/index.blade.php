@@ -1,6 +1,12 @@
 @layout('layouts.main')
 @section('content')
 <!-- view user -->
-<p>Bienvenue dans votre espace Utilisateur !</p>
+<h3>Espace utilisateur</h3>
+
+@if($user)
+
+<p>Bienvenue dans votre espace, {{ $user->name }} !</p>
+
+@endif
 
 @endsection

@@ -36,7 +36,7 @@ class User_Controller extends Base_Controller
  */
     public function action_index()
     {
-        echo 'bienvenue '.Auth::user()->username; // pas besoin de ECHO !!
+        // echo 'bienvenue '.Auth::user()->username; // fonctionne mais pas besoin de ECHO !!
 
         // Section::injecte() permet d'injecter des données dans la vue
         // ici on injecte un titre dans la vue, ce sera récupéré par blade avec @yield('titre')
@@ -46,7 +46,8 @@ class User_Controller extends Base_Controller
         // éventuellement récupérer des données du modèle !!
         // $posts = Post::all();
 
-        return View::make('user.index');
+        return View::make('user.index')
+           ->with('user', Auth::user());
         // ->with('posts',$posts);
     }
 
